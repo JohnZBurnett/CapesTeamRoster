@@ -1,5 +1,6 @@
 require_relative "cape"
 require_relative "team"
+require_relative "cities"
 
 def menu
   loop do
@@ -25,12 +26,22 @@ end
 def add_cape
   real_name = get_real_name
   cape_name = get_cape_name
+  alignment = get_alignment
+  city = get_city
   cape = Cape.new(real_name, cape_name)
+  cape.alignment = alignment
+  cape.city = city
   cape.save
   if team?
     add_team(cape)
   end
-  puts "This cape has been added."
+  puts "This cape has been added.\n"
+end
+
+def get_alignment
+  puts "Is this cape a hero, a villain, or a rogue?"
+  alignment = gets.chomp
+  alignment
 end
 
 def get_real_name
@@ -58,6 +69,12 @@ def team?
   end
 end
 
+def get_city
+  puts "Please enter this cape's city: "
+  city_name = gets.chomp
+  City.find_or_create_by_name(city_name)
+end
+
 def add_team(cape)
   puts "Please enter the name of this cape's team"
   team_name = gets.chomp
@@ -67,5 +84,3 @@ end
 def print_capes
   Cape.print_all
 end
-
-menu

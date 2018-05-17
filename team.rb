@@ -1,12 +1,12 @@
 require 'pry'
 class Team
-  attr_accessor :team, :name, :members
-  @@teams = []
+  attr_accessor :team, :name, :members, :city
+  @@all = []
 
   def initialize(name)
     @name = name
     @members = []
-    @@teams << self
+    @@all << self
   end
 
   def self.add_to_or_create_by_name(cape, team_name)
@@ -23,8 +23,12 @@ class Team
     end
   end
 
+  def self.all
+    @@all
+  end
+
   def self.find_team(team_name)
-    @@teams.find {|team| team.name == team_name}
+    @@all.find {|team| team.name == team_name}
   end
 
   def add_member(cape)
@@ -32,7 +36,7 @@ class Team
   end
 
   def self.print_teams
-    @@teams.each do |team|
+    @@all.each do |team|
       puts team.name
     end
   end

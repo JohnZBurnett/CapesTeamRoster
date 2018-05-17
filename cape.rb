@@ -1,6 +1,6 @@
 class Cape
   attr_reader :real_name, :cape_name
-  attr_accessor :team
+  attr_accessor :team, :alignment, :city
   @@cape_list = []
 
   def initialize(real_name, cape_name)
@@ -16,12 +16,16 @@ class Cape
 
   def self.print_all
     @@cape_list.each do |cape|
-      output = "#{cape.cape_name}, Real name: #{cape.real_name}"
+      output = "Cape name: #{cape.cape_name}, Real name: #{cape.real_name}, Alignment: #{cape.alignment}, City: #{cape.city.name}, "
       if cape.team
         output += " Team: " + cape.team.name
       end
       puts output
     end
+  end
+
+  def self.all
+    @@all
   end
 
   def save
