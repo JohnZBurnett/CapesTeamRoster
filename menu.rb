@@ -1,16 +1,19 @@
 require_relative "cape"
 require_relative "team"
 require_relative "cities"
+require 'pry'
 
 def menu
   loop do
     menu_message
     input = gets.chomp
-    break if input == "3"
+    break if input == "4"
     if input == "2"
       print_capes
     elsif input == "1"
       add_cape
+    elsif input == "3"
+      print_teams
     else
       puts "We didn't recognize that input. Try again?"
     end
@@ -20,7 +23,7 @@ end
 
 def menu_message
   puts "Welcome: Please choose from the following options: "
-  puts "1: Add new cape\n2: Review cape list\n3: Exit"
+  puts "1: Add new cape\n2: Review cape list\n3: Review team list\n4: Exit"
 end
 
 def add_cape
@@ -83,4 +86,8 @@ end
 
 def print_capes
   Cape.print_all
+end
+
+def print_teams
+  Team.print_all
 end

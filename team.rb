@@ -17,8 +17,9 @@ class Team
       curr_team
     else
       new_team = Team.new(team_name)
-      new_team.members << cape
+      new_team.add_member(cape)
       cape.team = new_team
+      new_team.city = cape.city
       new_team
     end
   end
@@ -32,12 +33,12 @@ class Team
   end
 
   def add_member(cape)
-
+    @members << cape
   end
 
-  def self.print_teams
+  def self.print_all
     @@all.each do |team|
-      puts team.name
+      puts "Team: #{team.name}, City: #{team.city.name}"
     end
   end
 
