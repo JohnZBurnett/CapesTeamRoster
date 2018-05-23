@@ -1,3 +1,4 @@
-require_relative '../menu.rb'
+require_relative '../config/environment'
+require_relative '../menu'
 
 menu

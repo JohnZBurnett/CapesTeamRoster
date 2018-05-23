@@ -31,10 +31,7 @@ def add_cape
   cape_name = get_cape_name
   alignment = get_alignment
   city = get_city
-  cape = Cape.new(real_name, cape_name)
-  cape.alignment = alignment
-  cape.city = city
-  cape.save
+  cape = Cape.create(real_name: real_name, cape_name: cape_name, alignment: alignment, city_id: city)
   if team?
     add_team(cape)
   end
@@ -42,9 +39,21 @@ def add_cape
 end
 
 def get_alignment
-  puts "Is this cape a hero, a villain, or a rogue?"
-  alignment = gets.chomp
-  alignment
+  puts "Please select your cape's alignment by choosing a number from the below:
+  1. Hero
+  2. Villain
+  3. Rogue"
+  input = gets.chomp
+  if input.to_i == 1
+    "Hero"
+  elsif input.to_i == 2
+    "Villain"
+  elsif input.to_i == 3
+    "Rogue"
+  else
+    puts "Sorry, but that wasn't a valid input. Please try again."
+    get_alignment
+  end
 end
 
 def get_real_name
@@ -75,13 +84,26 @@ end
 def get_city
   puts "Please enter this cape's city: "
   city_name = gets.chomp
-  City.find_or_create_by_name(city_name)
+  result = City.find_by(name: city_name)
+  if result == nil
+    new_city = City.new(name: city_name)
+    new_city.id
+  else
+    result.id
+  end
 end
 
 def add_team(cape)
   puts "Please enter the name of this cape's team"
   team_name = gets.chomp
-  Team.add_to_or_create_by_name(cape, team_name)
+  team_exists = Team.find_by(name: team_name)
+  if team_exists == nil
+    new_team = Team.create(name: team_name)
+    cape.team_id = new_team.id
+  else
+    cape.team_id = Team.find_by(name: team_name).id
+  end
+  cape.update(team_id: cape.team_id)
 end
 
 def print_capes
