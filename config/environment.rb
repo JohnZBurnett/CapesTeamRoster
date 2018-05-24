@@ -13,6 +13,6 @@ ActiveRecord::Base.establish_connection(
 )
 
 require_relative "../cape.rb"
-require_relative "../cities.rb"
+require_relative "../city.rb"
 require_relative "../menu.rb"
 require_relative "../team.rb"

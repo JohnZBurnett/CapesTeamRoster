@@ -1,6 +1,3 @@
-require_relative "cape"
-require_relative "team"
-require_relative "cities"
 require 'pry'
 
 def menu
@@ -30,8 +27,8 @@ def add_cape
   real_name = get_real_name
   cape_name = get_cape_name
   alignment = get_alignment
-  city = get_city
-  cape = Cape.create(real_name: real_name, cape_name: cape_name, alignment: alignment, city_id: city)
+  city_id = get_city
+  cape = Cape.create(real_name: real_name, cape_name: cape_name, alignment: alignment, city_id: city_id)
   if team?
     add_team(cape)
   end
@@ -86,7 +83,7 @@ def get_city
   city_name = gets.chomp
   result = City.find_by(name: city_name)
   if result == nil
-    new_city = City.new(name: city_name)
+    new_city = City.create(name: city_name)
     new_city.id
   else
     result.id
@@ -98,8 +95,10 @@ def add_team(cape)
   team_name = gets.chomp
   team_exists = Team.find_by(name: team_name)
   if team_exists == nil
-    new_team = Team.create(name: team_name)
-    cape.team_id = new_team.id
+    cape.build_team(name: team_name)
+    binding.pry
+    cape.team.save
+    cape.team_id
   else
     cape.team_id = Team.find_by(name: team_name).id
   end
