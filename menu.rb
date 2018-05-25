@@ -95,14 +95,14 @@ def add_team(cape)
   team_name = gets.chomp
   team_exists = Team.find_by(name: team_name)
   if team_exists == nil
-    cape.build_team(name: team_name)
+    cape.build_team(name: team_name, city: cape.city)
     binding.pry
-    cape.team.save
-    cape.team_id
+    cape.save
   else
-    cape.team_id = Team.find_by(name: team_name).id
+    binding.pry
+    cape.team = Team.find_by(name: team_name)
+    cape.save
   end
-  cape.update(team_id: cape.team_id)
 end
 
 def print_capes
