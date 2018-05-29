@@ -1,6 +1,7 @@
 class Cape < ActiveRecord::Base
   belongs_to :team
   belongs_to :city
+  has_many :powers, through: :cape_powers
   def add_to_team(team_id)
     cape = Cape.find_by(real_name: @real_name)
     cape.update(team_id: team_id)
