@@ -1,15 +1,15 @@
 require 'pry'
 
 def menu
+
   loop do
-    menu_message
-    input = gets.chomp
-    break if input == "4"
-    if input == "2"
+    input = menu_message
+    break if input == "Exit"
+    if input == "Review cape list"
       print_capes
-    elsif input == "1"
+    elsif input == "Add new cape"
       add_cape
-    elsif input == "3"
+    elsif input == "Review teams"
       print_teams
     else
       puts "We didn't recognize that input. Try again?"
@@ -19,8 +19,8 @@ def menu
 end
 
 def menu_message
-  puts "Welcome: Please choose from the following options: "
-  puts "1: Add new cape\n2: Review cape list\n3: Review team list\n4: Exit"
+  prompt = TTY::Prompt.new
+  prompt.select("Welcome: Please choose from the following options: ", ["Add new cape", "Review cape list", "Review teams", "Exit"])
 end
 
 def add_cape

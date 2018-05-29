@@ -7,4 +7,5 @@ source 'https://rubygems.org' do
  gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
  gem 'rspec'
  gem 'database_cleaner'
+ gem 'tty-prompt'
 end
