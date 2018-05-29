@@ -96,10 +96,8 @@ def add_team(cape)
   team_exists = Team.find_by(name: team_name)
   if team_exists == nil
     cape.build_team(name: team_name, city: cape.city)
-    binding.pry
     cape.save
   else
-    binding.pry
     cape.team = Team.find_by(name: team_name)
     cape.save
   end
