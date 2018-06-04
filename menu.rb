@@ -29,6 +29,7 @@ def add_cape
   alignment = get_alignment
   power_ids = get_power
   city_id = get_city
+  create_cape_in_db(real_name, cape_name, alignment, power_ids, city_id)
   puts "This cape has been added.\n"
 end
 
@@ -129,12 +130,14 @@ end
 def enter_additional_power(power_ids)
   puts "Enter another power? y/n"
   input = gets.chomp
-  while input != 'y' || input != 'n'
+  while input != 'y' && input != 'n'
     puts "We didn't recognize that input. Try again?"
+    input = gets.chomp
   end
   if input == 'y'
-    get_power(power_ids)
+    power_ids = get_power(power_ids)
   end
+  power_ids
 end
 
 def print_capes
