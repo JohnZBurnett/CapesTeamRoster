@@ -27,13 +27,19 @@ def add_cape
   real_name = get_real_name
   cape_name = get_cape_name
   alignment = get_alignment
-  power_id = get_power
+  power_ids = get_power
   city_id = get_city
-  cape = Cape.create(real_name: real_name, cape_name: cape_name, alignment: alignment, city_id: city_id, power_id: power_id)
+  puts "This cape has been added.\n"
+end
+
+def create_cape_in_db(real_name, cape_name, alignment, power_ids, city_id)
+  cape = Cape.create(real_name: real_name, cape_name: cape_name, alignment: alignment, city_id: city_id)
   if team?
     add_team(cape)
   end
-  puts "This cape has been added.\n"
+  power_ids.each do |power|
+    CapePower.create(cape_id: cape.id, power_id: power)
+  end
 end
 
 def get_alignment
@@ -104,8 +110,8 @@ def add_team(cape)
   end
 end
 
-def get_power
-  power_ids = []
+def get_power(prev_power_ids=[])
+  power_ids = prev_power_ids
   input = ask_for_power
   while !Power.find_by(name: input)
     input = ask_for_power
@@ -120,14 +126,14 @@ def ask_for_power
   gets.chomp
 end
 
-def enter_additional_power
+def enter_additional_power(power_ids)
   puts "Enter another power? y/n"
   input = gets.chomp
   while input != 'y' || input != 'n'
     puts "We didn't recognize that input. Try again?"
   end
   if input == 'y'
-    get_power
+    get_power(power_ids)
   end
 end
 
