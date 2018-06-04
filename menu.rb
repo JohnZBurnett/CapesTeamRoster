@@ -27,6 +27,7 @@ def add_cape
   real_name = get_real_name
   cape_name = get_cape_name
   alignment = get_alignment
+  power = get_power
   city_id = get_city
   cape = Cape.create(real_name: real_name, cape_name: cape_name, alignment: alignment, city_id: city_id)
   if team?
@@ -101,6 +102,18 @@ def add_team(cape)
     cape.team = Team.find_by(name: team_name)
     cape.save
   end
+end
+
+def get_power
+  input = ask_for_power
+  while !Power.find_by(name: input)
+    input = ask_for_power
+  end
+end
+
+def ask_for_power
+  puts "That wasn't a valid power type. Try again?"
+  gets.chomp
 end
 
 def print_capes
