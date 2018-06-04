@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 2018_06_04_145546) do
+
+  create_table "cape_powers", force: :cascade do |t|
+    t.integer "rating"
+    t.integer "cape_id"
+    t.integer "power_id"
+  end
 
   create_table "capes", force: :cascade do |t|
     t.string "real_name"
@@ -22,6 +28,10 @@ ActiveRecord::Schema.define(version: 6) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "powers", force: :cascade do |t|
+    t.string "type"
   end
 
   create_table "teams", force: :cascade do |t|

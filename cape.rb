@@ -14,7 +14,7 @@ class Cape < ActiveRecord::Base
 
   def self.print_all
     Cape.all.each do |cape|
-      output = "Cape name: #{cape.cape_name}, Real name: #{cape.real_name}, Alignment: #{cape.alignment}, City: #{cape.city.name}, "
+      output = "Cape name: #{cape.cape_name}, Real name: #{cape.real_name}, Alignment: #{cape.alignment}, City: #{cape.city.name}, Power: #{cape.powers.first.name} "
       if cape.team
         output += " Team: " + cape.team.name
       end
