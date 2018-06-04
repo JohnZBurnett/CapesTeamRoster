@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_145546) do
+ActiveRecord::Schema.define(version: 2018_06_04_171527) do
 
   create_table "cape_powers", force: :cascade do |t|
     t.integer "rating"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_145546) do
   end
 
   create_table "powers", force: :cascade do |t|
-    t.string "type"
+    t.string "name"
   end
 
   create_table "teams", force: :cascade do |t|

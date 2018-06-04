@@ -117,7 +117,7 @@ def get_power(prev_power_ids=[])
     input = ask_for_power
   end
   power_ids << Power.find_by(name: input).id
-  power_ids = enter_additional_power
+  power_ids = enter_additional_power(power_ids)
   power_ids
 end
 
